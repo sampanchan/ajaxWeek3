@@ -1,0 +1,58 @@
+/* 
+==============================================
+CONTENT:	Project Name Here
+AUTHOR:		Your Name Here
+==============================================
+
+TABLE OF CONTENTS:
+
+0. Reset
+1. Main Layout
+2. Content
+
+==============================================
+*/
+
+/* 0. Reset ================================= */
+
+/* 
+If you want to add partials, use Sass Modules via @use:
+@use 'variables';
+
+Usage: partial-name.variable/mixin/function-name:
+background: variables.$primary-color;
+*/
+
+@use 'reset';
+
+/* 1. Main Layout ================================= */
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background: rgb(46, 48, 50);
+}
+
+/* 2. Content ================================= */
+
+.container{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	
+	>form{
+		display: flex;
+		flex-direction: column;
+		max-width: 200px;
+		color: white;
+		background-color: rgb(148, 143, 137);
+		border-radius: 10px;
+		padding: 10px;
+	}
+
+	p{
+		color: pink;
+	}
+}
