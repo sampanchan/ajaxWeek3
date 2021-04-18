@@ -1,6 +1,6 @@
 
 
-console.log('hi')
+console.log('hello')
 
 class NYT_SearchAPI {
 
