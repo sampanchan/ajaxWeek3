@@ -31,6 +31,8 @@ class NYT_SearchAPI {
         const term = document.querySelector('input[name="term"]').value
         const data = {
             q: term, 
+            // begin_date:'',
+            // end_date:'',
             'api-key': this.API_KEY
 
         }
@@ -62,10 +64,10 @@ class NYT_SearchAPI {
             const headline = doc.headline.main
             const photoUrl = doc.multimedia[0].url
             const summary =  doc.snippet
+            const sectionName = doc.section_name
             const date = doc.pub_date
         
         //Article Item
-
         const articleItemEl = document.createElement('div');
         articleItemEl.setAttribute('class', 'article-item');
         articleContainer.appendChild(articleItemEl);
@@ -90,6 +92,11 @@ class NYT_SearchAPI {
         articleItemEl.appendChild(abstractEl);
         abstractEl.textContent = summary;
 
+        //section_name
+        const sectionNameEl = document.createElement('p');
+        articleItemEl.appendChild(sectionNameEl);
+        sectionNameEl.textContent = sectionName;
+
          // anchor-link
          const linkEl = document.createElement('a');
          articleItemEl.appendChild(linkEl);
@@ -105,8 +112,7 @@ class NYT_SearchAPI {
 
         
 
-        // const results = response.data.response.docs
-        // results.forEach(////) HOMEWORK GET IT ON THE DOM
+        // get date on DOM, URL not opening to article
         // show more input fields 
     }
 }
