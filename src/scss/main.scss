@@ -33,6 +33,7 @@ background: variables.$primary-color;
 
 body {
 	background: rgb(46, 48, 50);
+	font-family: 'Oswald', sans-serif;
 }
 
 /* 2. Content ================================= */
@@ -55,4 +56,37 @@ body {
 	p{
 		color: pink;
 	}
+
+	.classResults{
+		.article-Container{
+			text-align: center;
+			margin: 20px;
+
+			.article-item{
+				h2{
+					color:white;
+					font-size: 20px;
+				}
+				img{
+					width:300px;
+					height:auto;
+					border-radius: 10px;
+				}
+				.article-date{
+					color:aqua;
+					font-size: 15px;
+				}
+				.abstract-container{
+					color:rgb(108, 79, 214);
+					font-size: 15px;
+				}
+				a{
+					color:red;
+
+				}
+			
+			}
+		}
+	}
+	
 }

@@ -44,33 +44,10 @@ class NYT_SearchAPI {
         // parent container
         const articleContainer = document.createElement('div');
         articleContainer.setAttribute('class', 'article-Container');
-        resultsLi.appendChild.setAttribute( articleContainer);
+        const classResults = document.querySelector('.classResults')
+        classResults.appendChild( articleContainer);
 
-        //title
-        const title = document.createElement('h2');
-        articleContainer.appendChild(title);
-
-         //photo
-         const photo = document.createElement('img');
-         articleContainer.appendChild(photo);
-
-
-        //about/abstract
-        const abstractEl = document.createElement('p');
-        abstractEl.setAttribute('class', 'abstract-container');
-        articleContainer.appendChild(abstractEl);
-
-         // creating <li>
-         const resultsLi = document.createElement('li');
-         articleContainer.appendChild(resultsLi);
-
-         // anchor-link
-         const linkEl = document.createElement('a');
-         articleContainer.appendChild(linkEl);
-         const headline = document.createElement('h3');
-         linkEl.appendChild(headline);
-         linkEl.setAttribute('href');
-         linkEl.setAttribute('target', 'blank');
+       
 
 
 
@@ -80,6 +57,47 @@ class NYT_SearchAPI {
         for (let i =0; i < abstracts.length; i++){
             this.showMessage(abstracts[i].byline.original)
             console.log(abstracts[i].byline)
+
+            const doc = abstracts[i]
+            const headline = doc.headline.main
+            const photoUrl = doc.multimedia[0].url
+            const summary =  doc.snippet
+            const date = doc.pub_date
+        
+        //Article Item
+
+        const articleItemEl = document.createElement('div');
+        articleItemEl.setAttribute('class', 'article-item');
+        articleContainer.appendChild(articleItemEl);
+
+         //title
+        const titleEl = document.createElement('h2');
+        articleItemEl.appendChild(titleEl);
+
+         //photo
+         const photoEl = document.createElement('img');
+         articleItemEl.appendChild(photoEl);
+        photoEl.setAttribute('src',  'https://www.nytimes.com/' + photoUrl);
+
+        //date
+        const dateEl = document.createElement('p');
+        dateEl.setAttribute('class', '.article-date');
+        articleItemEl.appendChild(dateEl);
+
+        //about/abstract
+        const abstractEl = document.createElement('p');
+        abstractEl.setAttribute('class', 'abstract-container');
+        articleItemEl.appendChild(abstractEl);
+        abstractEl.textContent = summary;
+
+         // anchor-link
+         const linkEl = document.createElement('a');
+         articleItemEl.appendChild(linkEl);
+         const headlineEl = document.createElement('h3');
+         headlineEl.textContent = headline;
+         linkEl.appendChild(headlineEl);
+         linkEl.setAttribute('href', "");
+         linkEl.setAttribute('target', '_blank');
         }
 
 
