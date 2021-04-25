@@ -23,16 +23,48 @@ class NYT_SearchAPI {
         this.messageEl.innerHTML = message
     
     }
+    reformatDate = (str) => {
+        let dateRegex = /(\d{1,2}/)\/(\d{1,2}/)\/?(\d{2,4})?/
+        let dateParts = str.match(dateRegex)
+        console.log('reformatDate', str, dateParts, dateRegex)
+        let dateStr = ''
+        let curYY = (newDate()).getFullYear()
+        let year = dateParts[3]
+        if (!year) {
+            year = curYY
+        } else if (year.length == 2){
+            year = '20' + year
+        }
 
+        let month = dateParts[1]
+        if(month.lefth == 1){
+            month = '0' + month 
+        }
+
+        let day = dateParts[2]
+        if(day.lefth == 1){
+            day = '0' + day 
+        }
+
+
+        dateStr = `${year}${month}${day}`
+        console.log('reformated', dateStr)
+
+        return dateStr
+
+
+    }
     handleSearch = (evt) => {
         evt.preventDefault()
         console.log('searching....')
 
         const term = document.querySelector('input[name="term"]').value
+        const beginDate = this.reformatDate(document.querySelector('input[name="begin_date"]').value)
+        const endDate = this.reformatDate(document.querySelector('input[name="end_date"]').value)
         const data = {
             q: term, 
-            // begin_date:'',
-            // end_date:'',
+            begin_date: beginDate,
+            end_date: endDate,
             'api-key': this.API_KEY
 
         }
@@ -57,15 +89,17 @@ class NYT_SearchAPI {
         var abstracts = response.data.response.docs
         console.log(abstracts.length)
         for (let i =0; i < abstracts.length; i++){
-            this.showMessage(abstracts[i].byline.original)
-            console.log(abstracts[i].byline)
+            // this.showMessage(abstracts[i].byline.original)
+            // console.log(abstracts[i].byline)
 
             const doc = abstracts[i]
             const headline = doc.headline.main
+            const webUrl = doc.web_url
             const photoUrl = doc.multimedia[0].url
             const summary =  doc.snippet
             const sectionName = doc.section_name
-            const date = doc.pub_date
+            const author = doc.byline.original
+            const pubDate = new Date(doc.pub_date).toLocaleString()
         
         //Article Item
         const articleItemEl = document.createElement('div');
@@ -82,9 +116,13 @@ class NYT_SearchAPI {
         photoEl.setAttribute('src',  'https://www.nytimes.com/' + photoUrl);
 
         //date
+        
         const dateEl = document.createElement('p');
         dateEl.setAttribute('class', '.article-date');
         articleItemEl.appendChild(dateEl);
+        dateEl.textContent = pubDate;
+        
+        
 
         //about/abstract
         const abstractEl = document.createElement('p');
@@ -97,24 +135,26 @@ class NYT_SearchAPI {
         articleItemEl.appendChild(sectionNameEl);
         sectionNameEl.textContent = sectionName;
 
+        //by line
+
+        const authorEl = document.createElement('p');
+        articleItemEl.appendChild(authorEl);
+        authorEl.textContent = author;
+
          // anchor-link
          const linkEl = document.createElement('a');
          articleItemEl.appendChild(linkEl);
          const headlineEl = document.createElement('h3');
          headlineEl.textContent = headline;
          linkEl.appendChild(headlineEl);
-         linkEl.setAttribute('href', "");
+         linkEl.setAttribute('href', webUrl);
          linkEl.setAttribute('target', '_blank');
+
+
+         
         }
-
-
-
-
-        
-
-        // get date on DOM, URL not opening to article
-        // show more input fields 
     }
+
 }
 
 new NYT_SearchAPI()

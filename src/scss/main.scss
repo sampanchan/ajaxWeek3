@@ -54,15 +54,20 @@ body {
 	}
 
 	p{
-		color: pink;
+		color: rgb(240, 92, 116);
 	}
 
 	.classResults{
 		.article-Container{
 			text-align: center;
 			margin: 20px;
+			max-width: 500px;
+			background-color: rgb(210, 178, 240);
+			padding: 5px;
+			border-radius: 10px;
 
 			.article-item{
+				margin-bottom:10px ;
 				h2{
 					color:white;
 					font-size: 20px;
@@ -81,7 +86,7 @@ body {
 					font-size: 15px;
 				}
 				a{
-					color:red;
+					color:rgb(21, 147, 151);
 
 				}
 			
