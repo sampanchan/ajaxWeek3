@@ -98,7 +98,7 @@ class NYT_SearchAPI {
             const photoUrl = doc.multimedia[0].url
             const summary =  doc.snippet
             const sectionName = doc.section_name
-            const author = doc.byline.original
+            const author = abstracts[i].byline.original
             const pubDate = new Date(doc.pub_date).toLocaleString()
         
         //Article Item
@@ -156,5 +156,6 @@ class NYT_SearchAPI {
     }
 
 }
+
 
 new NYT_SearchAPI()
